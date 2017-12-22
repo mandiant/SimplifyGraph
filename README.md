@@ -1,3 +1,5 @@
+## SimplifyGraph - [3rd place winner of the 2017 Hex-Rays IDA Pro Plugin Contest](https://www.hex-rays.com/contests/2017/index.shtml)
+
 # Background
 My personal preference is to use IDA’s Graph mode when doing the majority of my reverse engineering. It provides a graphical representation of the control flow graph and gives visual cues about the structure of the current function that helps me better understand the disassembly.
 
