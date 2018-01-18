@@ -25,3 +25,7 @@ SimplifyGraph/%.32.o: SimplifyGraph/%.cpp
 SimplifyGraph/%.64.o: SimplifyGraph/%.cpp
 	$(CXX) $(CXXFLAGS64) -c -ISimplifyGraph -o $@ $<
 
+
+install:: $(SIMPLIFY32_EXE) $(SIMPLIFY64_EXE)
+	cp $(SIMPLIFY32_EXE) $(SIMPLIFY64_EXE) $(IDA_DIR)/plugins
+

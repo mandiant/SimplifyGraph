@@ -23,7 +23,7 @@ test/%.32.o: test/%.cpp
 test/%.64.o: test/%.cpp
 	$(CXX) $(CXXFLAGS64) -c -Itest -ISimplifyGraph -o $@ $<
 
-test: $(TEST32_EXE) $(TEST64_EXE)
+test:: $(TEST32_EXE) $(TEST64_EXE)
 	LD_LIBRARY_PATH=$(IDA_SDK)/lib/x86_linux_gcc_32/ test/test.32.exe
 	LD_LIBRARY_PATH=$(IDA_SDK)/lib/x86_linux_gcc_64/ test/test.64.exe
 

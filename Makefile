@@ -1,4 +1,5 @@
 IDA_SDK ?= $(HOME)/bin/ida-6.95/sdk
+IDA_DIR ?= $(HOME)/bin/ida-6.95
 
 
 CXX       := g++
@@ -9,7 +10,7 @@ CXXFLAGS64  := $(CXXFLAGS) -I $(IDA_SDK)/include -m32 -std=c++11 -MMD -fPIC -fpe
 LDXXFLAGS32 := $(LDXXFLAGS) -L $(IDA_SDK)/lib/x86_linux_gcc_32 -m32
 LDXXFLAGS64 := $(LDXXFLAGS) -L $(IDA_SDK)/lib/x86_linux_gcc_64 -m32
 
-.PHONY: all bin clean test
+.PHONY: all bin clean install test
 .DEFAULT_GOAL := all
 
 BINARIES :=
