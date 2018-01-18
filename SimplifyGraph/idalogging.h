@@ -25,9 +25,9 @@
 #define DEBUGEXEC(x) do { x } while(0)
 
 #ifdef idaapi 
-#define DEBUGLOG(format, ...) msg(format, __VA_ARGS__)
+#define DEBUGLOG(format, ...) msg(format, ##__VA_ARGS__)
 #else
-#define DEBUGLOG(format, ...) fprintf(stderr, format, __VA_ARGS__)
+#define DEBUGLOG(format, ...) fprintf(stderr, format, ##__VA_ARGS__)
 #endif // #ifdef _DEBUG
 
 #else  // #ifdef _DEBUG
@@ -36,9 +36,9 @@
 #endif // #ifdef _DEBUG
 
 #ifdef idaapi 
-#define LOG(format, ...) msg(format, __VA_ARGS__)
+#define LOG(format, ...) msg(format, ##__VA_ARGS__)
 #else
-#define LOG(format, ...) fprintf(stderr, format, __VA_ARGS__)
+#define LOG(format, ...) fprintf(stderr, format, ##__VA_ARGS__)
 #endif // #ifdef _DEBUG
 
 
