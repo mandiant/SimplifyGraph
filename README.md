@@ -125,6 +125,7 @@ SimplifyGraph is focused on automating tasks when doing manual reverse engineeri
 Prebuilt Windows binaries are available from the Releases tab of the GitHub project page. The zip files contains both IDA 32 and IDA 64 plugins for each of the new IDA 7.0 SDK and for the legacy IDA 6.95 SDK. Copy the two plugins for your version of IDA to the %IDADIR%\plugins directory.
 
 # Building
+## Windows
 This plugin & related files were built using Visual Studio 2013 Update 5.
 
 Environment Variables Referenced by project:
@@ -146,6 +147,21 @@ msbuild SimplifyGraph.sln /property:Configuration=ReleaseIDA70_64 /property:Plat
 msbuild SimplifyGraph.sln /property:Configuration=ReleaseIDA695_32 /property:Platform=Win32
 msbuild SimplifyGraph.sln /property:Configuration=ReleaseIDA695_64 /property:Platform=Win32
 ```
+## Linux
+This plugin & related files have been built using GCC 6.3.0 and GCC 7.2.0. For x86_64 Linux you must install the multilib GCC packages.
+
+Environment Variables Referenced by project:
+* IDA_SDK: path to the extracted IDA SDK. This should have `include` and `lib` paths beneath it.
+* IDA_DIR: path to your local IDA installation. This should have the `plugins` path beneath it.
+
+Building and installing the plugin are done using GNU make:
+* For IDA6.95: Open a terminal, then run:
+```
+IDA_SDK=/home/user/path/to/IdaSdk make all
+IDA_DIR=/home/user/path/to/Ida6.95 make install
+```
+
+* Building against the IDA7.0 SDK is untested for Linux.
 
 # Other stuff
 
