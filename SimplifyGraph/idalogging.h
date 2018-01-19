@@ -22,24 +22,39 @@
 
 
 #ifdef _DEBUG
-#define DEBUGEXEC(x) do { x } while(0)
+#  define DEBUGEXEC(x) do { x } while(0)
 
-#ifdef idaapi 
-#define DEBUGLOG(format, ...) msg(format, ##__VA_ARGS__)
-#else
-#define DEBUGLOG(format, ...) fprintf(stderr, format, ##__VA_ARGS__)
-#endif // #ifdef _DEBUG
+#  ifdef __LINUX__
+#    ifdef idaapi 
+#      define DEBUGLOG(format, ...) msg(format, ##__VA_ARGS__)
+#    else
+#      define DEBUGLOG(format, ...) fprintf(stderr, format, ##__VA_ARGS__)
+#    endif // #ifdef idaapi
+#  else
+#    ifdef idaapi 
+#    define DEBUGLOG(format, ...) msg(format, __VA_ARGS__)
+#    else
+#    define DEBUGLOG(format, ...) fprintf(stderr, format, __VA_ARGS__)
+#    endif // #ifdef idaapi
+#  endif
 
 #else  // #ifdef _DEBUG
-#define DEBUGLOG(format, ...)
-#define DEBUGEXEC(x) do { } while(0)
+#  define DEBUGLOG(format, ...)
+#  define DEBUGEXEC(x) do { } while(0)
 #endif // #ifdef _DEBUG
 
-#ifdef idaapi 
-#define LOG(format, ...) msg(format, ##__VA_ARGS__)
+#ifdef __LINUX__
+#  ifdef idaapi 
+#    define LOG(format, ...) msg(format, ##__VA_ARGS__)
+#  else
+#    define LOG(format, ...) fprintf(stderr, format, ##__VA_ARGS__)
+#  endif // #ifdef idaapi
 #else
-#define LOG(format, ...) fprintf(stderr, format, ##__VA_ARGS__)
-#endif // #ifdef _DEBUG
-
+#  ifdef idaapi 
+#    define LOG(format, ...) msg(format, __VA_ARGS__)
+#  else
+#    define LOG(format, ...) fprintf(stderr, format, __VA_ARGS__)
+#  endif // #ifdef idaapi
+#endif
 
 #endif //#ifndef FLARE_LOGGING

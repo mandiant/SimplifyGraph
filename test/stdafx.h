@@ -5,7 +5,7 @@
 
 #pragma once
 
-#ifdef _MSC_VER
+#ifndef __LINUX__
 #  include "targetver.h"
 
 #  include <windows.h>
