@@ -154,7 +154,7 @@ public:
         cacheColorMap.clear();
         func_t *pfn = get_func(m_fstart);
         if (!pfn) {
-            msg("%s: Unable to get func_t for %08"EAFMTSTR"\n", PLUGINNAME, m_fstart);
+            msg("%s: Unable to get func_t for %08" EAFMTSTR "\n", PLUGINNAME, m_fstart);
             return false;
         }
 
@@ -163,7 +163,7 @@ public:
             ea_t ea = fii.current();
             bgcolor_t col = get_item_color(ea);
             if (col != DEFCOLOR) {
-                //DEBUGLOG("Caching color: %08"EAFMTSTR" -> %08x\n", ea, col);
+                //DEBUGLOG("Caching color: %08" EAFMTSTR " -> %08x\n", ea, col);
                 cacheColorMap[ea] = col;
             }
         }
@@ -178,7 +178,7 @@ public:
     void restore() {
         func_t *pfn = get_func(m_fstart);
         if (!pfn) {
-            msg("%s: Unable to get func_t for %08"EAFMTSTR"\n", PLUGINNAME, m_fstart);
+            msg("%s: Unable to get func_t for %08" EAFMTSTR "\n", PLUGINNAME, m_fstart);
             return;
         }
         func_item_iterator_t fii;
@@ -186,11 +186,11 @@ public:
             ea_t ea = fii.current();
             auto it = cacheColorMap.find(ea);
             if (it == cacheColorMap.end()) {
-                //DEBUGLOG("Restoring def color: %08"EAFMTSTR" -> %08x\n", ea, DEFCOLOR);
+                //DEBUGLOG("Restoring def color: %08" EAFMTSTR " -> %08x\n", ea, DEFCOLOR);
                 set_item_color(ea, DEFCOLOR);
 
             } else {
-                //DEBUGLOG("Restoring cached color: %08"EAFMTSTR" -> %08x\n", ea, it->second);
+                //DEBUGLOG("Restoring cached color: %08" EAFMTSTR" -> %08x\n", ea, it->second);
                 set_item_color(ea, it->second);
             }
         }
@@ -345,10 +345,10 @@ public:
             bool ret1 = g_lastFlowGraph.getNodeArea(curr.n1, area1);
             bool ret2 = g_lastFlowGraph.getNodeArea(curr.n2, area2);
             if (ret1 && ret2) {
-                DEBUGLOG("Using format string 08"EAFMTSTR" for EAs\n");
-                desc.sprnt("%08"EAFMTSTR, area1.start);
+                DEBUGLOG("Using format string 08" EAFMTSTR " for EAs\n");
+                desc.sprnt("%08" EAFMTSTR, area1.start);
                 qstrncpy(arrptr[0], desc.c_str(), MAXSTR);
-                desc.sprnt("%08"EAFMTSTR, area2.start);
+                desc.sprnt("%08" EAFMTSTR, area2.start);
                 qstrncpy(arrptr[1], desc.c_str(), MAXSTR);
             } 
             desc.sprnt("%d", curr.nodes.size());
@@ -500,9 +500,9 @@ public:
         bool ret1 = g_lastFlowGraph.getNodeArea(curr.n1, area1);
         bool ret2 = g_lastFlowGraph.getNodeArea(curr.n2, area2);
         if (ret1 && ret2) {
-            DEBUGLOG("Using format string 08"EAFMTSTR" for EAs\n");
-            cols[0].sprnt("%08"EAFMTSTR, area1.start);
-            cols[1].sprnt("%08"EAFMTSTR, area2.start);
+            DEBUGLOG("Using format string 08" EAFMTSTR " for EAs\n");
+            cols[0].sprnt("%08" EAFMTSTR, area1.start);
+            cols[1].sprnt("%08" EAFMTSTR, area2.start);
         } 
         cols[2].sprnt("%d", curr.nodes.size());
         if(m_fg.getNodeCount() == 0) {
@@ -608,7 +608,7 @@ public:
         for (auto it = curr.nodes.begin(); it != curr.nodes.end(); ++it) {
             bool ret1 =  g_lastFlowGraph.getNodeArea(*it, area1);
             if (ret1) {
-                DEBUGLOG("Applying color to node %d: %08"EAFMTSTR" - %08"EAFMTSTR"\n", *it, area1.start, area1.end);
+                DEBUGLOG("Applying color to node %d: %08" EAFMTSTR " - %08" EAFMTSTR "\n", *it, area1.start, area1.end);
                 colorBlock(area1, g_highLightNodeColor);
             } else {
                 msg("%s: Unable to get node %d area_t\n", PLUGINNAME, *it);
@@ -618,7 +618,7 @@ public:
         Flare::fea_t jumpea = g_lastFlowGraph.getNodeAreaStart(curr.n1);
         staticClearRefreshChooser(false);
         jumpto(jumpea);
-        msg("%s: Highlighting isolated at subgraph %08"EAFMTSTR"\n", PLUGINNAME, jumpea);
+        msg("%s: Highlighting isolated at subgraph %08" EAFMTSTR "\n", PLUGINNAME, jumpea);
         return true;
     }
 
@@ -682,7 +682,7 @@ public:
                 for (auto git = it->nodes.begin(); git != it->nodes.end(); ++git) {
                     Flare::area_t ar1;
                     g_lastFlowGraph.getNodeArea(*git, ar1);
-                    DEBUGLOG("  %d: %08"EAFMTSTR" - %08"EAFMTSTR"\n", *git, ar1.start, ar1.end);
+                    DEBUGLOG("  %d: %08" EAFMTSTR " - %08" EAFMTSTR "\n", *git, ar1.start, ar1.end);
                 }
             }
         });
@@ -711,7 +711,7 @@ public:
             msg("%s: Empty flow chart\n", PLUGINNAME);
             return false;
         }
-        DEBUGLOG("Examining flowchart at %08"EAFMTSTR"\n", m_fstart);
+        DEBUGLOG("Examining flowchart at %08" EAFMTSTR "\n", m_fstart);
         return m_colorCache.snapshot(m_fstart);
     }
 
@@ -739,7 +739,7 @@ public:
             return false;
         }
         if (m_currentlyHighlightedGroup >= m_subgraphs.size()) {
-            LOG("Bad node to isNodeHighlighted: (curr highligh: %p) vs (subgraphs count: %p)\n", m_currentlyHighlightedGroup, m_subgraphs.size());
+            LOG("Bad node to isNodeHighlighted: (curr highligh: %d) vs (subgraphs count: %d)\n", m_currentlyHighlightedGroup, m_subgraphs.size());
             return false;
         }
         Flare::subgraph_t &curr = m_subgraphs[m_currentlyHighlightedGroup];
@@ -903,11 +903,11 @@ void SubgraphChooser::init_chi() {
     m_chi.get_attrs     = s_get_attrs;
 
     m_chi.popup_names = (const char **)qalloc(sizeof(char *) * 5);
-    *(((char **)m_chi.popup_names)+0) = "Create group"; // Insert
-    *(((char **)m_chi.popup_names)+1) = "Clear highlights"; // Delete
-    *(((char **)m_chi.popup_names)+2) = "Refresh groups"; // Edit
-    *(((char **)m_chi.popup_names)+3) = NULL; // Refresh
-    *(((char **)m_chi.popup_names)+4) = NULL; // Copy
+    *(((const char **)m_chi.popup_names)+0) = "Create group"; // Insert
+    *(((const char **)m_chi.popup_names)+1) = "Clear highlights"; // Delete
+    *(((const char **)m_chi.popup_names)+2) = "Refresh groups"; // Edit
+    *(((const char **)m_chi.popup_names)+3) = NULL; // Refresh
+    *(((const char **)m_chi.popup_names)+4) = NULL; // Copy
 }
 
 #else // #if IDA_SDK_VERSION < 700
@@ -1082,7 +1082,7 @@ static bool isGroupNode() {
 
 
 // returns true if all nodes of potential new group are not currently in another group
-static bool isValidNewGroup(mutable_graph_t *mgraph, const Flare::FlareGraph &fg, const Flare::intset_t &group) {
+bool isValidNewGroup(mutable_graph_t *mgraph, const Flare::FlareGraph &fg, const Flare::intset_t &group) {
     for (auto it = group.begin(); it != group.end(); ++it) {
         if (mgraph->is_subgraph_node(*it)) {
             int ngroup = mgraph->get_node_group(*it);
@@ -1096,7 +1096,7 @@ static bool isValidNewGroup(mutable_graph_t *mgraph, const Flare::FlareGraph &fg
 }
 
 // checks to see if all of the nodes in group already exist as a group to avoid needlessly recreating them
-static bool doesGroupAlreadyExist(GraphHelpContext &ctx, Flare::FlareGraph &fg, const Flare::intset_t &group) {
+bool doesGroupAlreadyExist(GraphHelpContext &ctx, Flare::FlareGraph &fg, const Flare::intset_t &group) {
     int knownGroup = -1;
     int totalCount = 0;
     int ungroupCount = 0;
@@ -1124,7 +1124,7 @@ static bool doesGroupAlreadyExist(GraphHelpContext &ctx, Flare::FlareGraph &fg, 
 }
 
 // Helper to create a single new group and then center the view
-static bool createGroup(GraphHelpContext &ctx, Flare::FlareGraph &fg, const Flare::intset_t &group) {
+bool createGroup(GraphHelpContext &ctx, Flare::FlareGraph &fg, const Flare::intset_t &group) {
     //first translate to IDA types
     group_crinfo_t newGroup;
     DEBUGLOG("%s: Creating new group: %d nodes\n\t", PLUGINNAME, group.size());
@@ -1181,7 +1181,7 @@ static bool createGroup(GraphHelpContext &ctx, Flare::FlareGraph &fg, const Flar
             }
             DEBUGEXEC(ctx.currNode = out_group_nodes[0];);
             DEBUGEXEC(printNodeInfo(ctx, ctx.currNode); );
-            msg("%s: Created new subgroup at %08"EAFMTSTR"\n", PLUGINNAME, ninfo.ea);
+            msg("%s: Created new subgroup at %08" EAFMTSTR "\n", PLUGINNAME, ninfo.ea);
         } else {
             msg("%s: Can't center on result node. Result size is %d\n", PLUGINNAME, out_group_nodes.size());
             return false;
@@ -1208,7 +1208,7 @@ bool loadCurrentFlowChart(qflow_chart_t *fc) {
         // assuming they're identical. nothing to do
         return true;
     }
-    DEBUGLOG("Loading updated flowchart: %08"EAFMTSTR"\n", fc->blocks[0].STARTEA);
+    DEBUGLOG("Loading updated flowchart: %08" EAFMTSTR "\n", fc->blocks[0].STARTEA);
     g_lastFlowGraph.clear();
 
 #if IDA_SDK_VERSION < 700
@@ -1307,7 +1307,7 @@ bool loadFlareGraphFromIda(GraphHelpContext &ctx, Flare::FlareGraph &fg, bool or
         }
     }
     fg.setFunctionEa(ctx.mgraph->gid);
-    DEBUGLOG("%s: Loaded graph at %08"EAFMTSTR": %d nodes, %d edges, %d sentries\n", 
+    DEBUGLOG("%s: Loaded graph at %08" EAFMTSTR ": %d nodes, %d edges, %d sentries\n", 
             PLUGINNAME, ctx.mgraph->gid, fg.getNodeCount(), fg.getEdgeCount(), sentryCount
     );
     return true;
@@ -1462,6 +1462,27 @@ static DiscoverIsolatedSubgraphsHandler g_discoversubgraphah;
 static CollapseCurrentSubgraphsHandler g_collasepsubgraphah;
 static ComplementGraphActionHandler g_complementsubgraphah;
 static ComplementExpandGraphActionHandler g_complementexpandsubgraphah;
+
+//-------------------------------------------------------------------------
+int idaapi init(void);
+void idaapi term(void);
+RUN_RET_TYPE idaapi run(RUN_ARG_TYPE);
+
+extern "C" {
+
+plugin_t PLUGIN = {
+    IDP_INTERFACE_VERSION,
+    0,                    // plugin flags
+    init,                 // initialize
+    term,                 // terminate. this pointer may be NULL.
+    run,                  // invoke plugin
+    PLUGIN_COMMENT,       // long comment about the plugin
+    PLUGIN_HELP,          // multiline help about the plugin
+    WANTED_NAME,          // the preferred short name of the plugin
+    NULL                  // the preferred hotkey to run the plugin
+};
+
+}
 
 //-------------------------------------------------------------------------
 static const action_desc_t actions[] = {
@@ -1737,7 +1758,7 @@ bool getSwitchCaseText(GraphHelpContext &ctx, Flare::FlareGraph &fg, int node, q
     char locbuff[BUFFSIZE] = { 0 };
     if (node < g_lastFlowGraph.getNodeCount()) {
         ea_t blockea =  g_lastFlowGraph.getNodeAreaStart(node);
-        DEBUGLOG("Getting comment from block %d: 0x%08"EAFMTSTR"\n", node, blockea);
+        DEBUGLOG("Getting comment from block %d: 0x%08" EAFMTSTR "\n", node, blockea);
         bool ret = getEaText(blockea, nodetext);
         if (ret) {
             return true;
@@ -1793,7 +1814,7 @@ void printNodeInfo(const GraphHelpContext &ctx, int node, bool doSubgraphs) {
     }
 #if 0  // leaving this dead code block in as a reference for the future of what i tried, but ida didn't like
     node_info_t ninfo1;
-    msg("ctx.mgraph->gid: %08"EAFMTSTR"\n", ctx.mgraph->gid);
+    msg("ctx.mgraph->gid: %08" EAFMTSTR "\n", ctx.mgraph->gid);
     // apprently all of the node_info funcs are broken, or they don't work on the built-in ida graph
     bool ret = get_node_info2(&ninfo1, ctx.mgraph->gid, node);
     if (ret) {
@@ -1801,7 +1822,7 @@ void printNodeInfo(const GraphHelpContext &ctx, int node, bool doSubgraphs) {
     } else {
         msg("Failed at get_node_info2\n");
     }
-    msg("NodeInfo %8d: (valid_flags: %04x)(bg %08x)(frame %08x)(ea %08"EAFMTSTR")'%s'\n", 
+    msg("NodeInfo %8d: (valid_flags: %04x)(bg %08x)(frame %08x)(ea %08" EAFMTSTR ")'%s'\n", 
             node, ninfo1.get_flags_for_valid(), ninfo1.bg_color, 
             ninfo1.frame_color, ninfo1.ea, ninfo1.text.c_str()
        );
@@ -1813,7 +1834,7 @@ void printNodeInfo(const GraphHelpContext &ctx, int node, bool doSubgraphs) {
     } else {
         msg("Failed at viewer_get_node_info\n");
     }
-    msg("NodeInfo %8d: (bg %08x)(frame %08x)(ea %08"EAFMTSTR")'%s'\n", node, 
+    msg("NodeInfo %8d: (bg %08x)(frame %08x)(ea %08" EAFMTSTR ")'%s'\n", node, 
             ninfo2.bg_color, ninfo2.frame_color, ninfo2.ea, ninfo2.text.c_str()
        );
 
@@ -1824,7 +1845,7 @@ void printNodeInfo(const GraphHelpContext &ctx, int node, bool doSubgraphs) {
         msg("Failed at deprecated get_node_info\n");
     } else {
         // orange TODO: comment says that i have to free returned data
-        msg("NodeInfo %8d: (bg %08x)(ea %08"EAFMTSTR")'%s'\n", node, nodecolor, nodeea, oldninfo);
+        msg("NodeInfo %8d: (bg %08x)(ea %08" EAFMTSTR ")'%s'\n", node, nodecolor, nodeea, oldninfo);
     }
 #endif
     // trying to interpret graph information available from ida...
@@ -1933,7 +1954,7 @@ bool handleChangedView(qflow_chart_t *newfc) {
         DEBUGLOG("closing chooser (size): g_lastFlowGraph-: %d vs newfc: %d\n", g_lastFlowGraph.getNodeCount() , newfc->size());
         doReload = true;
     } else if (g_lastFlowGraph.getFunctionEa() != newfc->blocks[0].STARTEA) {
-        DEBUGLOG("closing chooser (ea): g_lastFlowGraph-: %08"EAFMTSTR" newfc: %08"EAFMTSTR"\n", g_lastFlowGraph.getFunctionEa(), newfc->blocks[0].STARTEA);
+        DEBUGLOG("closing chooser (ea): g_lastFlowGraph-: %08" EAFMTSTR " newfc: %08" EAFMTSTR "\n", g_lastFlowGraph.getFunctionEa(), newfc->blocks[0].STARTEA);
         doReload = true;
     }
     if (doReload) {
@@ -1994,7 +2015,7 @@ void idaapi runUniqueReachable(void) {
         return;
     }
 
-    DEBUGLOG("%s: Got mutable_graph %08"EAFMTSTR": %d nodes\n", PLUGINNAME, ctx.mgraph->gid, ctx.mgraph->size());
+    DEBUGLOG("%s: Got mutable_graph %08" EAFMTSTR ": %d nodes\n", PLUGINNAME, ctx.mgraph->gid, ctx.mgraph->size());
     DEBUGEXEC(printGraphSelection(ctx); );
     DEBUGEXEC(printNodeInfo(ctx, ctx.currNode); );
     collapseReachableUniqueNodes(ctx);
@@ -2055,7 +2076,12 @@ static ssize_t idaapi view_callback(void * ud, int notification_code, va_list va
             }
 
 #endif
+
+#ifdef __LINUX__
+            tcc_renderer_type_t rt = (tcc_renderer_type_t) va_arg(va, int);
+#else
             tcc_renderer_type_t rt = va_arg(va, tcc_renderer_type_t);
+#endif
             SubgraphChooser::staticClearRefreshChooser();
             //if (rt != TCCRT_GRAPH) {
             //    DEBUGLOG("No longer graph\n");
@@ -2283,22 +2309,4 @@ RUN_RET_TYPE idaapi run(RUN_ARG_TYPE) {
         SubgraphChooser::show(); 
     }
     return RUN_RET;
-}
-
-//-------------------------------------------------------------------------
-
-extern "C" {
-
-plugin_t PLUGIN = {
-    IDP_INTERFACE_VERSION,
-    0,                    // plugin flags
-    init,                 // initialize
-    term,                 // terminate. this pointer may be NULL.
-    run,                  // invoke plugin
-    PLUGIN_COMMENT,       // long comment about the plugin
-    PLUGIN_HELP,          // multiline help about the plugin
-    WANTED_NAME,          // the preferred short name of the plugin
-    NULL                  // the preferred hotkey to run the plugin
-};
-
 }

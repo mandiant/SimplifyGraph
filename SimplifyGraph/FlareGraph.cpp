@@ -1038,7 +1038,7 @@ namespace Flare {
             return false;
         }
         double coverPercent = double(outgraph.nodes.size())/getNodeCount();
-        unsigned int coverPercentInt = unsigned int(coverPercent*100.0);
+        unsigned int coverPercentInt = (unsigned int) (coverPercent*100.0);
         if (coverPercentInt > maxNodePercentage) {
             DEBUGLOG("Subgraph too big <%d,%d>: %d nodes. %d percent > %d\n", n1, n2, outgraph.nodes.size(), coverPercentInt, maxNodePercentage);
             outgraph.nodes.clear();

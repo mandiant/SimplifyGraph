@@ -17,11 +17,13 @@
 
 #pragma once
 
-#include "targetver.h"
+#ifndef __LINUX__
+#  include "targetver.h"
 
-#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
-// Windows Header Files:
-#include <windows.h>
+#  define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+  // Windows Header Files:
+#  include <windows.h>
+#endif
 
 // c++ includes
 #include <sstream>

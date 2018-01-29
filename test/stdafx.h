@@ -5,9 +5,19 @@
 
 #pragma once
 
-#include "targetver.h"
+#ifndef __LINUX__
+#  include "targetver.h"
 
-#include <windows.h>
+#  include <windows.h>
+#  include <tchar.h>
+#else
+#  define  TCHAR char
+#  define _TCHAR char
+#  define _TSCHAR signed char
+#  define _TUCHAR unsigned char
+#  define _TXCHAR unsigned char
+#  define _T(s) s
+#endif
 
 // c++ includes
 #include <sstream>
@@ -22,7 +32,6 @@
 
 
 #include <stdio.h>
-#include <tchar.h>
 #include <stdint.h>
 
 // Boost includes
